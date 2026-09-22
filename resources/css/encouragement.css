@@ -1,0 +1,158 @@
+/* ===== Base ===== */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+:root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ===== Opening screen ===== */
+.opening-bg {
+    background: linear-gradient(135deg, #CFEFFF 0%, #FBD3E9 45%, #FFF3B0 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.reveal-text {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: revealIn 0.8s ease forwards;
+}
+.reveal-delay-1 { animation-delay: 0.35s; }
+.reveal-delay-2 { animation-delay: 0.7s; }
+
+@keyframes revealIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.opening-particles span,
+.floating-decor span {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    animation: float 8s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+/* ===== Sunset ending ===== */
+.sunset-bg {
+    background: linear-gradient(180deg, #FFD9B7 0%, #FBD3E9 55%, #E4D9FF 100%);
+}
+
+.ending-line {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.ending-line.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== Games ===== */
+#hearts-field, #bubbles-field {
+    cursor: pointer;
+}
+
+.falling-heart, .floating-bubble {
+    position: absolute;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    font-size: 1.75rem;
+    line-height: 1;
+    background: none;
+    border: none;
+    padding: 0.35rem;
+}
+
+.falling-heart { animation: fallDown linear forwards; }
+.floating-bubble { animation: floatUp linear forwards; }
+
+@keyframes fallDown {
+    from { transform: translateY(-2rem); }
+    to { transform: translateY(17rem); }
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); }
+    to { transform: translateY(-18rem); }
+}
+
+.pop-particle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 0.9rem;
+    animation: popOut 0.6s ease-out forwards;
+}
+
+@keyframes popOut {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--dx, 20px), var(--dy, -20px)) scale(0.3); opacity: 0; }
+}
+
+/* ===== Garden ===== */
+.garden-plant {
+    font-size: 2rem;
+    animation: pop 0.5s ease;
+}
+
+/* ===== Stars / constellation ===== */
+.constellation-star {
+    position: absolute;
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: #fff;
+    cursor: pointer;
+    animation: twinkle 2.4s ease-in-out infinite;
+}
+.constellation-star.found {
+    opacity: 1 !important;
+    animation: none;
+    filter: drop-shadow(0 0 6px #fff);
+}
+
+/* ===== Music player ===== */
+#music-player.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===== Playlist ===== */
+.playlist-item.playing .playlist-icon::before {
+    content: "⏸";
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    .opening-bg,
+    .reveal-text,
+    .falling-heart,
+    .floating-bubble,
+    .garden-plant,
+    .constellation-star,
+    .animate-float,
+    .animate-twinkle {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ===== Focus states ===== */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #F49AC2;
+    outline-offset: 2px;
+}
