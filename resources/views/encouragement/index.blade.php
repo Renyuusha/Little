@@ -31,24 +31,24 @@
         <section id="home" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-b from-babyblue/40 via-cream to-pink-soft/30 overflow-hidden">
             <div class="floating-decor absolute inset-0 pointer-events-none" aria-hidden="true"></div>
 
-            <button id="logo-easter-egg" type="button" aria-label="little heart logo"
+            <button id="logo-easter-egg" type="button" aria-label="logo hati kecil"
                     class="mb-6 text-4xl select-none hover:scale-110 transition-transform">♡</button>
 
             <h1 class="font-display text-4xl md:text-6xl text-slate-700 mb-3">
-                Hallow, {{ $recipientName }} :3
+                Haloo, {{ $recipientName }} :3
             </h1>
-            <p class="font-body text-lg md:text-2xl text-slate-600 mb-2">Just a little something for you.</p>
-            <p class="font-body text-sm md:text-base text-slate-500 mb-8 italic">No reason. Just because.</p>
+            <p class="font-body text-lg md:text-2xl text-slate-600 mb-2">Cuma sesuatu kecil buat ka araaaw.</p>
+            <p class="font-body text-sm md:text-base text-slate-500 mb-8 italic">Gak ada alasan khusus. Pengen aja.</p>
 
             <a href="#good-vibes"
                class="font-display bg-white/80 backdrop-blur text-pink-deep px-7 py-3 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform">
-                Let's go →
+                Ayo mulai →
             </a>
         </section>
 
         {{-- ============ 2. GOOD VIBES ============ --}}
         <section id="good-vibes" class="relative py-24 px-6 flex flex-col items-center text-center bg-gradient-to-b from-pink-soft/30 to-yellow-soft/30">
-            <h2 class="font-display text-2xl md:text-3xl text-slate-700 mb-8">Today's little reminder ✨</h2>
+            <h2 class="font-display text-2xl md:text-3xl text-slate-700 mb-8">Pengingat kecil hari ini ✨</h2>
 
             <div class="relative w-full max-w-sm">
                 <div id="vibe-card" class="bg-white/85 backdrop-blur rounded-[2rem] shadow-soft px-8 py-14 min-h-[180px] flex items-center justify-center">
@@ -58,23 +58,23 @@
 
             <button id="another-vibe" type="button" data-good-vibes='@json($goodVibes)'
                     class="mt-8 font-display bg-lavender/70 text-slate-700 px-6 py-3 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform">
-                Another one!
+                Lagi dong!
             </button>
         </section>
 
         {{-- ============ 3. MINI GAMES ============ --}}
         <section id="games" class="relative py-24 px-6 bg-gradient-to-b from-yellow-soft/30 to-babyblue/30">
-            <h2 class="font-display text-2xl md:text-3xl text-slate-700 mb-12 text-center">A few little games</h2>
+            <h2 class="font-display text-2xl md:text-3xl text-slate-700 mb-12 text-center">Gym kecik</h2>
 
             <div class="grid gap-8 max-w-5xl mx-auto md:grid-cols-3 items-stretch">
 
                 {{-- Game 1: Catch the Hearts --}}
-                <x-game-card id="game-hearts" title="Catch The Hearts 💗">
+                <x-game-card id="game-hearts" title="Tangkap Hatinya 💗">
                     <div id="hearts-field" class="relative h-64 rounded-2xl bg-pink-soft/20 overflow-hidden touch-none" aria-live="polite">
-                        <p id="hearts-score" class="absolute top-2 left-2 text-sm font-display text-pink-deep z-10">Score: 0 / 10</p>
+                        <p id="hearts-score" class="absolute top-2 left-2 text-sm font-display text-pink-deep z-10">Skor: 0 / 10</p>
                         <p id="hearts-result" class="hidden absolute inset-0 flex-col items-center justify-center gap-2 text-center bg-white/90 z-20">
-                            <span class="font-display text-lg">YAY! 🎉</span>
-                            <span class="text-sm">You caught them all!</span>
+                            <span class="font-display text-lg">YEAY! 🎉</span>
+                            <span class="text-sm">Semuanya berhasil ketangkep!</span>
                         </p>
                     </div>
                     <button data-game-restart="hearts" type="button" class="mt-auto w-full font-display text-sm bg-pink-deep/90 text-white py-2 rounded-full hover:scale-105 active:scale-95 transition-transform">
@@ -83,11 +83,11 @@
                 </x-game-card>
 
                 {{-- Game 2: Pop the Bubbles --}}
-                <x-game-card id="game-bubbles" title="Pop The Bubbles 🫧">
+                <x-game-card id="game-bubbles" title="Pecahkan Gelembungnya 🫧">
                     <div id="bubbles-field" class="relative h-64 rounded-2xl bg-babyblue/20 overflow-hidden touch-none" aria-live="polite">
-                        <p id="bubbles-score" class="absolute top-2 left-2 text-sm font-display text-blue-500 z-10">Popped: 0</p>
+                        <p id="bubbles-score" class="absolute top-2 left-2 text-sm font-display text-blue-500 z-10">Pecah: 0</p>
                         <p id="bubbles-result" class="hidden absolute inset-x-2 bottom-2 text-center text-xs font-display bg-white/90 rounded-full py-2 z-20">
-                            Okayyy, you're pretty good at this 👀
+                            Wihh, jago juga ternyata 👀
                         </p>
                     </div>
                     <button data-game-restart="bubbles" type="button" class="mt-auto w-full font-display text-sm bg-blue-400/90 text-white py-2 rounded-full hover:scale-105 active:scale-95 transition-transform">
@@ -96,7 +96,7 @@
                 </x-game-card>
 
                 {{-- Game 3: Lucky Box --}}
-                <x-game-card id="game-lucky" title="Pick one.">
+                <x-game-card id="game-lucky" title="Pilih satu.">
                     <div id="lucky-boxes" class="flex justify-center gap-4">
                         @foreach ($luckyBoxes as $i => $box)
                             <button type="button" data-lucky-box="{{ $i }}" data-label="{{ $box['label'] }}"
@@ -117,14 +117,14 @@
         <section id="gift" class="relative py-28 px-6 flex flex-col items-center text-center bg-gradient-to-b from-babyblue/30 to-peach/30 overflow-hidden">
             <p class="font-display text-xl md:text-2xl text-slate-700 mb-10">Oh, Ngehehe tekan ka ^^</p>
 
-            <button id="gift-box" type="button" aria-label="Open your gift"
+            <button id="gift-box" type="button" aria-label="Buka hadiahmu"
                     class="text-7xl md:text-8xl hover:scale-110 active:scale-95 transition-transform">
                 🎁
             </button>
 
             <div id="gift-message" class="hidden mt-8 max-w-md bg-white/85 backdrop-blur rounded-[2rem] shadow-soft px-8 py-8">
-                <p class="font-display text-xl text-slate-700 mb-3">This is for you ♡</p>
-                <p class="text-slate-600">A tiny reminder that someone out there is wishing you a good day.</p>
+                <p class="font-display text-xl text-slate-700 mb-3">Ini buat kamu ♡</p>
+                <p class="text-slate-600">Pengingat kecil kalau ada seseorang di luar sana yang berharap harimu menyenangkan.</p>
             </div>
         </section>
 
@@ -137,7 +137,7 @@
                     <div class="playlist-item flex items-center gap-3 p-3 rounded-2xl hover:bg-pink-soft/20 transition-colors"
                          data-src="{{ asset($song['file']) }}" data-index="{{ $i }}">
                         <button type="button" data-playlist-play="{{ $i }}"
-                                aria-label="Play {{ $song['title'] }}"
+                                aria-label="Putar {{ $song['title'] }}"
                                 class="w-10 h-10 shrink-0 rounded-full bg-pink-deep/90 text-white flex items-center justify-center">
                             <span class="playlist-icon">▶</span>
                         </button>
@@ -166,7 +166,7 @@
             <div class="flex flex-wrap justify-center gap-3 max-w-lg">
                 @foreach ($moodResponses as $emoji => $response)
                     <button type="button" data-mood-response="{{ $response }}"
-                            aria-label="Mood: {{ $emoji }}"
+                            aria-label="Perasaan: {{ $emoji }}"
                             class="mood-btn text-3xl md:text-4xl bg-white/70 rounded-2xl shadow-soft w-16 h-16 md:w-20 md:h-20 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform">
                         {{ $emoji }}
                     </button>
@@ -178,19 +178,19 @@
 
         {{-- ============ 7. GARDEN ============ --}}
         <section id="garden" class="relative py-24 px-6 flex flex-col items-center text-center bg-gradient-to-b from-yellow-soft/30 to-babyblue/30">
-            <h2 class="font-display text-2xl md:text-3xl text-slate-700 mb-3">Little Garden 🌱</h2>
-            <p class="text-slate-500 mb-8 text-sm">Plant a little something.</p>
+            <h2 class="font-display text-2xl md:text-3xl text-slate-700 mb-3">Kebuk Kecik 🌱</h2>
+            <p class="text-slate-500 mb-8 text-sm">Tekan tombol Tanem :3</p>
 
             <div id="garden-plot" class="relative w-full max-w-xl min-h-[10rem] rounded-[2rem] bg-gradient-to-b from-yellow-soft/40 to-[#c9a876]/30 shadow-soft flex flex-wrap items-end justify-center gap-2 p-4"></div>
 
             <div class="flex flex-wrap gap-3 justify-center mt-6">
                 <button id="plant-button" type="button"
                         class="font-display bg-pink-deep/90 text-white px-6 py-3 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform">
-                    Plant something 🌱
+                    Tanam 🌱
                 </button>
                 <button id="garden-reset" type="button"
                         class="font-display bg-white/70 text-slate-600 px-6 py-3 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform">
-                    Reset garden
+                    Reset
                 </button>
             </div>
             <p id="garden-message" class="mt-6 font-display text-slate-700 min-h-[1.5rem]"></p>
@@ -198,7 +198,7 @@
 
         {{-- ============ 8. CONSTELLATION ============ --}}
         <section id="stars" class="relative py-28 px-6 bg-gradient-to-b from-[#1b1436] to-[#3a2b63] text-white overflow-hidden">
-            <h2 class="font-display text-2xl md:text-3xl mb-3 text-center">Wish ⭐</h2>
+            <h2 class="font-display text-2xl md:text-3xl mb-3 text-center">Permohonan ⭐</h2>
             <p class="text-white/70 mb-10 text-center text-sm">Tekan Bintangnya.</p>
 
             <div id="constellation-sky" class="relative max-w-3xl mx-auto h-72 md:h-96" data-star-messages='@json($starMessages)'></div>
@@ -218,8 +218,8 @@
         </section>
 
         {{-- Lightbox modal --}}
-        <div id="lightbox" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/70 backdrop-blur-sm px-6" role="dialog" aria-modal="true" aria-label="Photo viewer">
-            <button id="lightbox-close" type="button" aria-label="Close" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
+        <div id="lightbox" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/70 backdrop-blur-sm px-6" role="dialog" aria-modal="true" aria-label="Penampil foto">
+            <button id="lightbox-close" type="button" aria-label="Tutup" class="absolute top-5 right-5 text-white text-3xl">&times;</button>
             <figure class="max-w-lg w-full">
                 <img id="lightbox-image" src="" alt="" class="w-full rounded-2xl shadow-glow">
                 <figcaption id="lightbox-caption" class="text-white text-center mt-4 font-display"></figcaption>
@@ -233,14 +233,14 @@
                 Jangan DITEKAN TOMBOL INI :3.
             </button>
             <div id="surprise-message" class="hidden mt-8 max-w-md bg-white/85 backdrop-blur rounded-[2rem] shadow-soft px-8 py-8">
-                <p class="font-display text-lg text-slate-700 mb-2">I told you not to click it 😭</p>
-                <p class="text-slate-600">Anyway... here's some extra happiness for you ♡</p>
+                <p class="font-display text-lg text-slate-700 mb-2">skskksksk dah kuduga pasti tetep aja di tekan XD</p>
+                <p class="text-slate-600">Ngehehe yaudah sieeee tekan aja semuanya biar happy XD</p>
             </div>
         </section>
 
         {{-- ============ 11. COMPLIMENT MACHINE ============ --}}
         <section class="relative py-24 px-6 flex flex-col items-center text-center bg-gradient-to-b from-lavender/30 to-cream">
-            <h2 class="font-display text-2xl md:text-3xl text-slate-700 mb-8">Press the button.</h2>
+            <h2 class="font-display text-2xl md:text-3xl text-slate-700 mb-8">Tekan tombolnya.</h2>
 
             <div id="compliment-slot" class="bg-white/85 backdrop-blur rounded-[2rem] shadow-soft px-8 py-10 min-h-[120px] w-full max-w-sm flex items-center justify-center overflow-hidden">
                 <p id="compliment-text" class="font-display text-lg md:text-xl text-slate-700"></p>
@@ -248,17 +248,17 @@
 
             <button id="compliment-button" type="button" data-compliments='@json($compliments)'
                     class="mt-8 font-display bg-peach/80 text-slate-700 px-7 py-3 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform">
-                Give me one →
+                Kasih satu dong →
             </button>
         </section>
 
         {{-- ============ 12. ENDING ============ --}}
         <section id="ending" class="relative py-32 px-6 flex flex-col items-center text-center sunset-bg text-slate-700">
-            <p class="font-display text-2xl md:text-3xl mb-4 ending-line">That's it...</p>
-            <p class="font-body text-base md:text-lg mb-3 max-w-md ending-line">I just wanted to leave a little something here for you.</p>
-            <p class="font-body text-base md:text-lg mb-3 max-w-md ending-line">Hope it made you smile, even just a little.</p>
-            <p class="font-body text-base md:text-lg mb-8 max-w-md ending-line">Take care of yourself, okay? ♡</p>
-            <p class="font-display text-xl mb-2 ending-line">See you around ✨</p>
+            <p class="font-display text-2xl md:text-3xl mb-4 ending-line">Udah, segitu aja...</p>
+            <p class="font-body text-base md:text-lg mb-3 max-w-md ending-line">Aku cuma mau ninggalin sesuatu kecil di sini.</p>
+            <p class="font-body text-base md:text-lg mb-3 max-w-md ending-line">Semoga bisa bikin ka ara senyum, walau cuma sedikit hehe.</p>
+            <p class="font-body text-base md:text-lg mb-8 max-w-md ending-line">Sehat sehat ya ka ara ^^ ♡</p>
+            <p class="font-display text-xl mb-2 ending-line">Sampai ketemu lagi ✨</p>
             <p class="text-sm text-slate-500 ending-line">— {{ $senderName }}</p>
         </section>
     </div>

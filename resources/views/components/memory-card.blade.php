@@ -4,7 +4,7 @@
     // Pink placeholder shown when the real photo file is missing
     $placeholderSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">'
         . '<rect width="100%" height="100%" fill="#FBD3E9"/>'
-        . '<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#fff">photo ' . $index . '</text>'
+        . '<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#fff">foto ' . $index . '</text>'
         . '</svg>';
     $placeholder = 'data:image/svg+xml;charset=UTF-8,' . rawurlencode($placeholderSvg);
 @endphp
@@ -14,7 +14,7 @@
         data-lightbox-trigger
         data-image="{{ asset($image) }}"
         data-caption="{{ $caption }}"
-        aria-label="View photo: {{ $caption }}">
+        aria-label="Lihat foto: {{ $caption }}">
     <img src="{{ asset($image) }}"
          data-fallback="{{ $placeholder }}"
          onerror="this.onerror=null;this.src=this.dataset.fallback;"

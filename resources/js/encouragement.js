@@ -256,7 +256,7 @@ function initHeartsGame() {
         spawnTapTarget(field, {
             className: 'falling-heart',
             symbol: HEART_EMOJIS[Math.floor(Math.random() * HEART_EMOJIS.length)],
-            label: 'Catch this heart',
+            label: 'Tangkap hati ini',
             duration: 3 + Math.random() * 2,
             onTap: catchHeart,
         });
@@ -265,7 +265,7 @@ function initHeartsGame() {
     function catchHeart(heart) {
         if (score >= TARGET) return;
         score += 1;
-        scoreEl.textContent = `Score: ${score} / ${TARGET}`;
+        scoreEl.textContent = `Skor: ${score} / ${TARGET}`;
         burstParticles(heart, field, '+1');
         heart.remove();
 
@@ -279,7 +279,7 @@ function initHeartsGame() {
 
     function startGame() {
         score = 0;
-        scoreEl.textContent = `Score: 0 / ${TARGET}`;
+        scoreEl.textContent = `Skor: 0 / ${TARGET}`;
         resultEl.classList.add('hidden');
         resultEl.classList.remove('flex');
         field.querySelectorAll('.falling-heart').forEach((h) => h.remove());
@@ -309,7 +309,7 @@ function initBubblesGame() {
         const bubble = spawnTapTarget(field, {
             className: 'floating-bubble',
             symbol: '🫧',
-            label: 'Pop this bubble',
+            label: 'Pecahkan gelembung ini',
             duration: 4 + Math.random() * 2,
             onTap: popBubble,
         });
@@ -318,7 +318,7 @@ function initBubblesGame() {
 
     function popBubble(bubble) {
         popped += 1;
-        scoreEl.textContent = `Popped: ${popped}`;
+        scoreEl.textContent = `Pecah: ${popped}`;
         burstParticles(bubble, field, '✨');
         bubble.remove();
 
@@ -330,7 +330,7 @@ function initBubblesGame() {
 
     function startGame() {
         popped = 0;
-        scoreEl.textContent = 'Popped: 0';
+        scoreEl.textContent = 'Pecah: 0';
         resultEl.classList.add('hidden');
         field.querySelectorAll('.floating-bubble').forEach((b) => b.remove());
         clearInterval(spawnInterval);
@@ -546,9 +546,9 @@ function initGarden() {
         growthTimers.push(growth);
 
         if (count === MAX_PLANTS) {
-            message.textContent = 'Look at that little garden 🌷';
+            message.textContent = 'Lihat deh kebun kecilnya 🌷';
             setTimeout(() => {
-                message.textContent = 'Pretty nice, right?';
+                message.textContent = 'Cantik kan?';
             }, 2200);
             fireConfetti(25);
         }
@@ -583,8 +583,8 @@ function initConstellation() {
         star.style.left = `${5 + Math.random() * 90}%`;
         star.style.top = `${5 + Math.random() * 85}%`;
         star.style.animationDelay = `${Math.random() * 2}s`;
-        star.setAttribute('aria-label', 'Tap this star');
-        star.dataset.message = messages[i] || 'You deserve good things.';
+        star.setAttribute('aria-label', 'Tekan bintang ini');
+        star.dataset.message = messages[i] || 'Kamu pantas dapet hal-hal baik.';
 
         star.addEventListener('click', () => {
             if (star.classList.contains('found')) return;
@@ -595,9 +595,9 @@ function initConstellation() {
             if (foundCount === STAR_COUNT) {
                 fireConfetti(40);
                 setTimeout(() => {
-                    message.textContent = 'You found them all ⭐';
+                    message.textContent = 'Semua bintang udah ketemu ⭐';
                     setTimeout(() => {
-                        message.textContent = 'Looks like the sky has something to say today.';
+                        message.textContent = 'Kayaknya langit punya pesan buat kamu hari ini.';
                     }, 2200);
                 }, 800);
             }
@@ -613,8 +613,8 @@ function initConstellation() {
     secretStar.textContent = '✦';
     secretStar.style.left = '92%';
     secretStar.style.top = '8%';
-    secretStar.setAttribute('aria-label', 'A faint star');
-    secretStar.addEventListener('click', () => showEasterEggToast('You found me.'));
+    secretStar.setAttribute('aria-label', 'Bintang redup');
+    secretStar.addEventListener('click', () => showEasterEggToast('Ketemu deh aku.'));
     sky.appendChild(secretStar);
 }
 
@@ -814,7 +814,7 @@ function initEasterEggs() {
     logo?.addEventListener('click', () => {
         logoClicks += 1;
         if (logoClicks === 7) {
-            showEasterEggToast('Okay, you\'re curious huh? 😂');
+            showEasterEggToast('Wah, penasaran banget ya? 😂');
             logoClicks = 0;
         }
     });
@@ -826,7 +826,7 @@ function initEasterEggs() {
         if (e.key.length !== 1) return;
         typed = (typed + e.key.toLowerCase()).slice(-secretWord.length);
         if (typed === secretWord) {
-            showEasterEggToast('Secret unlocked ✨');
+            showEasterEggToast('Rahasia terbuka ✨');
             fireConfetti(40);
         }
     });

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-    <title>A Little Something For You ♡</title>
-    <meta name="description" content="A little corner of good vibes.">
+    <title>Sesuatu Kecil Buat Kamu ♡</title>
+    <meta name="description" content="Pojok kecil penuh hal-hal baik.">
     <meta name="theme-color" content="#f8e9e9">
 
-    <meta property="og:title" content="A Little Something For You ♡">
-    <meta property="og:description" content="A little corner of good vibes, made just for you.">
+    <meta property="og:title" content="Sesuatu Kecil Buat Kamu ♡">
+    <meta property="og:description" content="Pojok kecil penuh hal-hal baik, dibuat khusus buat kamu.">
     <meta property="og:type" content="website">
 
     <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
