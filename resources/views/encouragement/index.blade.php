@@ -5,9 +5,9 @@
         <div class="opening-particles absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true"></div>
 
         <div class="relative z-10">
-            <p class="font-display text-3xl md:text-5xl text-slate-700 mb-3 reveal-text">heyy...</p>
+            <p class="font-display text-3xl md:text-5xl text-slate-700 mb-3 reveal-text">awooo...</p>
             <p class="font-body text-lg md:text-2xl text-slate-600 mb-10 reveal-text reveal-delay-1">
-                aku punya sesuatu buat kamu :)
+                aku punya sesuatu :)
             </p>
             <button id="open-button" type="button"
                     class="font-display text-lg md:text-xl bg-pink-deep text-white px-8 py-3 rounded-full shadow-glow hover:scale-105 active:scale-95 transition-transform reveal-text reveal-delay-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-pink-soft">
