@@ -154,14 +154,14 @@
                 @endforeach
                 <audio id="playlist-audio" preload="none"></audio>
                 <p class="text-xs text-slate-400 mt-3 text-center">
-                    (Gatau lagu fav ka ara T.T)
+                    (Gatau lagu fav {{ $recipientName }} T.T)
                 </p>
             </div>
         </section>
 
         {{-- ============ 6. MOOD PICKER ============ --}}
         <section id="mood" class="relative py-24 px-6 flex flex-col items-center text-center bg-gradient-to-b from-lavender/30 to-yellow-soft/30">
-            <h2 class="font-display text-2xl md:text-3xl text-slate-700 mb-8">Perasaan ka ara sekarang^^</h2>
+            <h2 class="font-display text-2xl md:text-3xl text-slate-700 mb-8">Perasaan {{ $recipientName }} sekarang^^</h2>
 
             <div class="flex flex-wrap justify-center gap-3 max-w-lg">
                 @foreach ($moodResponses as $emoji => $response)

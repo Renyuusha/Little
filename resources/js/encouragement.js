@@ -47,9 +47,8 @@ const CONFETTI_COLORS = ['#FBD3E9', '#F49AC2', '#FFD9B7', '#E4D9FF', '#CFEFFF', 
 
 function fireConfetti(count = 60) {
     if (!confettiCtx || prefersReducedMotion) return;
-    const amount = prefersReducedMotion ? Math.min(count, 15) : count;
 
-    for (let i = 0; i < amount; i++) {
+    for (let i = 0; i < count; i++) {
         confettiParticles.push({
             x: Math.random() * confettiCanvas.width,
             y: -20 - Math.random() * 100,
@@ -109,17 +108,9 @@ function initOpening() {
     // fill opening particles with little emoji decorations
     const particleHost = openingScreen?.querySelector('.opening-particles');
     if (particleHost && !prefersReducedMotion) {
-        const emojis = ['✨', '⭐', '☁️', '💫'];
-        for (let i = 0; i < 14; i++) {
-            const span = document.createElement('span');
-            span.textContent = emojis[i % emojis.length];
-            span.style.left = `${Math.random() * 100}%`;
-            span.style.top = `${Math.random() * 100}%`;
-            span.style.fontSize = `${1 + Math.random() * 1.4}rem`;
-            span.style.animationDuration = `${5 + Math.random() * 5}s`;
-            span.style.animationDelay = `${Math.random() * 4}s`;
-            particleHost.appendChild(span);
-        }
+        scatterEmojis(particleHost, ['✨', '⭐', '☁️', '💫'], 14, {
+            minSize: 1, sizeRange: 1.4, durationRange: 5, maxDelay: 4,
+        });
     }
 
     openBtn?.addEventListener('click', () => {
@@ -152,16 +143,25 @@ function initFloatingDecor() {
     const host = document.querySelector('.floating-decor');
     if (!host || prefersReducedMotion) return;
 
-    const emojis = ['♡', '✨', '☁️', '🌸', '⭐'];
-    for (let i = 0; i < 12; i++) {
+    scatterEmojis(host, ['♡', '✨', '☁️', '🌸', '⭐'], 12, {
+        minSize: 1.2, sizeRange: 1.6, durationRange: 6, maxDelay: 3, opacity: '0.5',
+    });
+}
+
+/**
+ * Scatter floating emoji spans at random positions inside a host element.
+ * The animation itself comes from CSS; this only randomizes size and timing.
+ */
+function scatterEmojis(host, emojis, count, { minSize, sizeRange, durationRange, maxDelay, opacity }) {
+    for (let i = 0; i < count; i++) {
         const span = document.createElement('span');
         span.textContent = emojis[i % emojis.length];
         span.style.left = `${Math.random() * 100}%`;
         span.style.top = `${Math.random() * 100}%`;
-        span.style.fontSize = `${1.2 + Math.random() * 1.6}rem`;
-        span.style.opacity = '0.5';
-        span.style.animationDuration = `${5 + Math.random() * 6}s`;
-        span.style.animationDelay = `${Math.random() * 3}s`;
+        span.style.fontSize = `${minSize + Math.random() * sizeRange}rem`;
+        if (opacity) span.style.opacity = opacity;
+        span.style.animationDuration = `${5 + Math.random() * durationRange}s`;
+        span.style.animationDelay = `${Math.random() * maxDelay}s`;
         host.appendChild(span);
     }
 }
@@ -248,37 +248,28 @@ function initHeartsGame() {
 
     let score = 0;
     let spawnInterval = null;
+    const TARGET = 10;
     const HEART_EMOJIS = ['💗', '💕', '💖', '💘'];
 
     function spawnHeart() {
-        if (score >= 10) return;
-        const heart = document.createElement('button');
-        heart.type = 'button';
-        heart.className = 'falling-heart';
-        heart.textContent = HEART_EMOJIS[Math.floor(Math.random() * HEART_EMOJIS.length)];
-        heart.style.left = `${5 + Math.random() * 85}%`;
-        const duration = 3 + Math.random() * 2;
-        heart.style.animationDuration = `${duration}s`;
-        heart.setAttribute('aria-label', 'Catch this heart');
-
-        heart.addEventListener('animationend', () => heart.remove());
-        heart.addEventListener('click', () => catchHeart(heart));
-        heart.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            catchHeart(heart);
-        }, { passive: false });
-
-        field.appendChild(heart);
+        if (score >= TARGET) return;
+        spawnTapTarget(field, {
+            className: 'falling-heart',
+            symbol: HEART_EMOJIS[Math.floor(Math.random() * HEART_EMOJIS.length)],
+            label: 'Catch this heart',
+            duration: 3 + Math.random() * 2,
+            onTap: catchHeart,
+        });
     }
 
     function catchHeart(heart) {
-        if (score >= 10) return;
+        if (score >= TARGET) return;
         score += 1;
-        scoreEl.textContent = `Score: ${score} / 10`;
+        scoreEl.textContent = `Score: ${score} / ${TARGET}`;
         burstParticles(heart, field, '+1');
         heart.remove();
 
-        if (score >= 10) {
+        if (score >= TARGET) {
             clearInterval(spawnInterval);
             resultEl.classList.remove('hidden');
             resultEl.classList.add('flex');
@@ -288,7 +279,7 @@ function initHeartsGame() {
 
     function startGame() {
         score = 0;
-        scoreEl.textContent = 'Score: 0 / 10';
+        scoreEl.textContent = `Score: 0 / ${TARGET}`;
         resultEl.classList.add('hidden');
         resultEl.classList.remove('flex');
         field.querySelectorAll('.falling-heart').forEach((h) => h.remove());
@@ -315,24 +306,14 @@ function initBubblesGame() {
     const TARGET = 12;
 
     function spawnBubble() {
-        const bubble = document.createElement('button');
-        bubble.type = 'button';
-        bubble.className = 'floating-bubble';
-        bubble.textContent = '🫧';
-        bubble.style.left = `${5 + Math.random() * 85}%`;
+        const bubble = spawnTapTarget(field, {
+            className: 'floating-bubble',
+            symbol: '🫧',
+            label: 'Pop this bubble',
+            duration: 4 + Math.random() * 2,
+            onTap: popBubble,
+        });
         bubble.style.bottom = '0';
-        const duration = 4 + Math.random() * 2;
-        bubble.style.animationDuration = `${duration}s`;
-        bubble.setAttribute('aria-label', 'Pop this bubble');
-
-        bubble.addEventListener('animationend', () => bubble.remove());
-        bubble.addEventListener('click', () => popBubble(bubble));
-        bubble.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            popBubble(bubble);
-        }, { passive: false });
-
-        field.appendChild(bubble);
     }
 
     function popBubble(bubble) {
@@ -358,6 +339,30 @@ function initBubblesGame() {
 
     startGame();
     restartBtn?.addEventListener('click', startGame);
+}
+
+/**
+ * Spawn an animated, tappable emoji button inside a game field (shared by both catch/pop games).
+ * It removes itself when its CSS animation ends.
+ */
+function spawnTapTarget(field, { className, symbol, label, duration, onTap }) {
+    const target = document.createElement('button');
+    target.type = 'button';
+    target.className = className;
+    target.textContent = symbol;
+    target.style.left = `${5 + Math.random() * 85}%`;
+    target.style.animationDuration = `${duration}s`;
+    target.setAttribute('aria-label', label);
+
+    target.addEventListener('animationend', () => target.remove());
+    target.addEventListener('click', () => onTap(target));
+    target.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        onTap(target);
+    }, { passive: false });
+
+    field.appendChild(target);
+    return target;
 }
 
 /**
@@ -441,12 +446,14 @@ function initPlaylist() {
 
     items.forEach((item) => {
         const playBtn = item.querySelector('[data-playlist-play]');
-        const progressBar = item.querySelector('.playlist-progress');
 
         playBtn.addEventListener('click', () => {
             const isPlaying = item.classList.contains('playing');
 
-            items.forEach((i) => i.classList.remove('playing'));
+            items.forEach((i) => {
+                i.classList.remove('playing');
+                i.querySelector('.playlist-progress').style.width = '0';
+            });
 
             if (isPlaying) {
                 audio.pause();
@@ -511,6 +518,7 @@ function initGarden() {
     const STAGES = ['🌱', '🌿', '🌷', '🌸'];
     const MAX_PLANTS = 8;
     let count = 0;
+    let growthTimers = [];
 
     plantBtn.addEventListener('click', () => {
         if (count >= MAX_PLANTS) return;
@@ -535,6 +543,7 @@ function initGarden() {
             void plant.offsetWidth; // restart animation
             plant.classList.add('garden-plant');
         }, 700);
+        growthTimers.push(growth);
 
         if (count === MAX_PLANTS) {
             message.textContent = 'Look at that little garden 🌷';
@@ -546,6 +555,8 @@ function initGarden() {
     });
 
     resetBtn.addEventListener('click', () => {
+        growthTimers.forEach(clearInterval);
+        growthTimers = [];
         plot.innerHTML = '';
         count = 0;
         message.textContent = '';
@@ -699,7 +710,7 @@ function initEndingReveal() {
 
     const observer = new IntersectionObserver(
         (entries) => {
-            entries.forEach((entry, i) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('in-view');
                     observer.unobserve(entry.target);
@@ -769,13 +780,15 @@ function initMusicPlayer() {
     const muteIcon = document.getElementById('mute-icon');
     if (!audio || !toggleBtn) return;
 
+    // keep the icon in sync with the real playback state (music may also start from the opening screen)
+    audio.addEventListener('play', () => (icon.textContent = '⏸️'));
+    audio.addEventListener('pause', () => (icon.textContent = '▶️'));
+
     toggleBtn.addEventListener('click', () => {
         if (audio.paused) {
             audio.play().catch(() => {});
-            icon.textContent = '⏸️';
         } else {
             audio.pause();
-            icon.textContent = '▶️';
         }
     });
 
